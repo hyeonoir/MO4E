@@ -22,9 +22,11 @@ USER_DB = {}
 # Fail response
 ID_NOT_FOUND = HTTPException(status_code=400, detail="id not found.")
 
+
 @app.get("/users/all")
 def select_asterisk():
     return USER_DB
+
 
 @app.post("/users", response_model=CreateOut)
 def create_user(user: CreateIn):
@@ -43,7 +45,7 @@ def create_user(user: CreateIn):
 def read_user(id: int):
     if id not in USER_DB:
         raise ID_NOT_FOUND
-    return {"nickname": USER_DB[id]}
+    return {"data": USER_DB[id]}
 
 
 @app.put("/users")
